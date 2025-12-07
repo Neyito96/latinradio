@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>岸のりこの ラテン音楽文化～ここだけの話～「ラテンラジオ」をポッドキャストアワードへ！</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --spotify-bg: #121212;
+      --spotify-card: #181818;
+      --spotify-soft: #1f1f1f;
+      --spotify-green: #1db954;
+      --text-main: #ffffff;
+      --text-sub: #b3b3b3;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px 12px 48px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN",
+        "Yu Gothic", "游ゴシック体", "Meiryo", sans-serif;
+      background-color: var(--spotify-bg);
+      color: var(--text-main);
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* ヘッダー：Spotify っぽいショーヘッダー */
+    .show-header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .show-main {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .cover {
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(135deg, #333 0%, #777 50%, #222 100%);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      flex-shrink: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: #ddd;
+      text-align: center;
+      padding: 8px;
+    }
+
+    /* 実際のカバー画像URLがあれば、下のコメントアウトを使ってください
+    .cover {
+      background-image: url('カバー画像のURL');
+      background-size: cover;
+      background-position: center;
+    }
+    */
+
+    .show-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .show-type {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--text-sub);
+      letter-spacing: 0.12em;
+      margin-bottom: 4px;
+    }
+
+    .show-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .show-meta {
+      font-size: 0.95rem;
+      color: var(--text-sub);
+      margin-bottom: 10px;
+    }
+
+    .show-meta span + span::before {
+      content: "・";
+      margin: 0 4px;
+    }
+
+    .show-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .btn-play {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: none;
+      background-color: var(--spotify-green);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.1s ease;
+    }
+
+    .btn-play:hover {
+      transform: scale(1.03);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.7);
+      background-color: #1ed760;
+    }
+
+    .play-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: #000;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .play-icon::before {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 5px 0 5px 9px;
+      border-color: transparent transparent transparent #1db954;
+      margin-left: 2px;
+    }
+
+    .show-desc {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      max-width: 640px;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding-top: 16px;
+      }
+      .show-main {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .cover {
+        width: 150px;
+        height: 150px;
+      }
+      .show-title {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* 投票ステップ部分：Spotify っぽいカード */
+    .steps-card {
+      background-color: var(--spotify-card);
+      border-radius: 12px;
+      padding: 18px 16px 20px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+      border: 1px solid #282828;
+    }
+
+    .steps-intro {
+      font-size: 0.96rem;
+      margin-bottom: 10px;
+      color: var(--text-sub);
+    }
+
+    .steps-intro strong {
+      color: #fff;
+    }
+
+    .step {
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    .step:first-of-type {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 8px;
+    }
+
+    .step-heading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .step-number {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid #fff;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .step p {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      margin: 2px 0 6px;
+    }
+
+    .program-box {
+      background-color: var(--spotify-soft);
+      border-radius: 8px;
+      padding: 10px 10px 8px;
+      margin-top: 4px;
+      font-size: 0.88rem;
+    }
+
+    .program-label {
+      color: var(--text-sub);
+      font-size: 0.8rem;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .program-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+      word-break: keep-all;
+    }
+
+    .note-list {
+      margin: 2px 0 6px 18px;
+      padding: 0;
+      font-size: 0.8rem;
+      color: var(--text-sub);
+    }
+
+    .note-list li {
+      margin-bottom: 2px;
+    }
+
+    .btn-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    button,
+    .link-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid #404040;
+      background-color: #282828;
+      color: #fff;
+      font-size: 0.86rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.1s ease, transform 0.08s ease, box-shadow 0.08s ease;
+    }
+
+    button:hover,
+    .link-button:hover {
+      background-color: #3a3a3a;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .copied-message {
+      font-size: 0.8rem;
+      color: #1ed760;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .copied-message.is-visible {
+      opacity: 1;
+    }
+
+    .footer-note {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: var(--text-sub);
+    }
+
+    .footer-note ul {
+      margin: 4px 0 4px 18px;
+      padding: 0;
+    }
+
+    .hashtag {
+      font-weight: 600;
+      margin-top: 4px;
+      font-size: 0.9rem;
+    }
+
+    .episodes-link {
+      margin-top: 6px;
+      font-size: 0.86rem;
+    }
+
+    .episodes-link a {
+      color: #1db954;
+      text-decoration: none;
+    }
+
+    .episodes-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <!-- Spotify風ヘッダー -->
+    <section class="show-header">
+      <div class="show-main">
+        <div class="cover">
+          ラテンラジオ<br>番組カバー
+          <!-- 実際のカバー画像URLが分かったら
+               <img src="..." alt="ラテンラジオ カバー画像" style="width:100%;height:100%;object-fit:cover;"> に差し替え可 -->
+        </div>
+        <div class="show-text">
+          <div class="show-type">PODCAST</div>
+          <div class="show-title">岸のりこの ラテン音楽文化～ここだけの話～「ラテンラジオ」</div>
+          <div class="show-meta">
+            <span>岸のりこ</span>
+            <span>音楽・トーク</span>
+          </div>
+          <div class="show-actions">
+            <a
+              class="btn-play"
+              href="https://open.spotify.com/show/4AcFbQQTsce6Wr191mvNfZ?si=6b3586bcf9f74a69"
+              target="_blank" rel="noopener noreferrer"
+            >
+              <span class="play-icon"></span>
+              <span>Spotifyで聴く</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <p class="show-desc">
+        いつもラテンラジオを聴いてくださってありがとうございます。<br>
+        このページから、JAPAN PODCAST AWARDS へのリスナー投票を簡単に送ることができます。
+      </p>
+    </section>
+
+    <!-- 投票ステップ：ダークカード内にまとめる -->
+    <section class="steps-card">
+      <p class="steps-intro">
+        手順は <strong>①番組名をコピー → ②投票フォームを開く → ③貼り付けて送信</strong> の 3ステップだけです。
+      </p>
+
+      <!-- STEP 1 -->
+      <section class="step" aria-labelledby="step1-title">
+        <div class="step-heading">
+          <div class="step-number">1</div>
+          <div class="step-title" id="step1-title">番組名をコピーする</div>
+        </div>
+        <p>公式の番組名をコピーします。下のボタンを押すだけで OK です。</p>
+
+        <div class="program-box">
+          <div class="program-label">PROGRAM TITLE</div>
+          <div class="program-name" id="programName">
+            岸のりこの ラテン音楽文化～ここだけの話～「ラテンラジオ」
+          </div>
+          <ul class="note-list">
+            <li>※ 投票フォームの「番組名①」欄に貼り付けます。</li>
+          </ul>
+          <div class="btn-row">
+            <button type="button" onclick="copyProgramName()">番組名をコピー</button>
+            <span class="copied-message" id="copiedMessage">✅ コピーしました！</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step" aria-labelledby="step2-title">
+        <div class="step-heading">
+          <div class="step-number">2</div>
+          <div class="step-title" id="step2-title">投票フォームを開く</div>
+        </div>
+        <p>
+          <strong>第7回 JAPAN PODCAST AWARDS</strong> の「一次選考」リスナー投票フォームが別タブで開きます。
+        </p>
+        <div class="btn-row">
+          <a
+            class="link-button"
+            href="https://ssl.1242.com/aplform/form/aplform.php?fcode=jpa2025_general"
+            target="_blank" rel="noopener noreferrer"
+          >
+            投票フォームを開く
+          </a>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step" aria-labelledby="step3-title">
+        <div class="step-heading">
+          <div class="step-number">3</div>
+          <div class="step-title" id="step3-title">番組名を貼り付けて送信</div>
+        </div>
+        <p>
+          開いたフォームの <strong>「番組名①」欄</strong> をタップ / クリックして、<br>
+          長押し / 右クリック → <strong>貼り付け（ペースト）</strong> で<br>
+          「岸のりこの ラテン音楽文化～ここだけの話～『ラテンラジオ』」を入力してください。
+        </p>
+        <p>
+          他の必須項目も入力して、<strong>「入力内容を確認」→「この内容で登録する」</strong> を押せば投票完了です。
+        </p>
+
+        <div class="footer-note">
+          <p><strong>ご注意</strong></p>
+          <ul>
+            <li>・投票は <strong>ひとり一回</strong> までです。</li>
+            <li>・よろしければ、このページのURLもお友達にシェアしていただけるとうれしいです。</li>
+          </ul>
+          <p class="hashtag">#ラテンラジオを推そう</p>
+
+          <p class="episodes-link">
+            ▶ 番組ページはこちら：
+            <a
+              href="https://open.spotify.com/show/4AcFbQQTsce6Wr191mvNfZ?si=6b3586bcf9f74a69"
+              target="_blank" rel="noopener noreferrer"
+            >
+              Spotify で「ラテンラジオ」を開く
+            </a>
+          </p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const PROGRAM_NAME = '岸のりこの ラテン音楽文化～ここだけの話～「ラテンラジオ」';
+
+    function copyProgramName() {
+      const copiedMessage = document.getElementById('copiedMessage');
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(PROGRAM_NAME)
+          .then(function () {
+            showCopied(copiedMessage);
+          })
+          .catch(function () {
+            fallbackCopy(copiedMessage);
+          });
+      } else {
+        fallbackCopy(copiedMessage);
+      }
+    }
+
+    function fallbackCopy(copiedMessage) {
+      const textArea = document.createElement('textarea');
+      textArea.value = PROGRAM_NAME;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-9999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+      } catch (e) {
+        console.warn('コピーに失敗しました:', e);
+      }
+      document.body.removeChild(textArea);
+      showCopied(copiedMessage);
+    }
+
+    function showCopied(el) {
+      if (!el) return;
+      el.classList.add('is-visible');
+      setTimeout(function () {
+        el.classList.remove('is-visible');
+      }, 1700);
+    }
+  </script>
+</body>
+</html>

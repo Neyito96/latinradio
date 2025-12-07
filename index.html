@@ -72,10 +72,16 @@
       object-fit: cover;
       display: block;
       border-radius: 8px;
+      opacity: 0;
+      transition: opacity 420ms ease-in-out;
     }
 
     .cover .placeholder {
       display: none;
+    }
+
+    .cover img.is-loaded {
+      opacity: 1;
     }
 
     /* 実際のカバー画像URLがあれば、下のコメントアウトを使ってください
@@ -366,7 +372,7 @@
     <section class="show-header">
       <div class="show-main">
         <div class="cover">
-          <img src="/assets/cover-v3.png" alt="ラテンラジオ カバー画像" />
+          <img src="/assets/cover-v3.png" alt="ラテンラジオ カバー画像" onload="this.classList.add('is-loaded')" />
           <div class="placeholder">ラテンラジオ<br>番組カバー</div>
         </div>
         <div class="show-text">

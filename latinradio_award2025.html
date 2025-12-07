@@ -64,6 +64,20 @@
       padding: 8px;
     }
 
+    .cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .cover .placeholder {
+      position: absolute;
+      color: #ddd;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
     /* 実際のカバー画像URLがあれば、下のコメントアウトを使ってください
     .cover {
       background-image: url('カバー画像のURL');
@@ -352,9 +366,8 @@
     <section class="show-header">
       <div class="show-main">
         <div class="cover">
-          ラテンラジオ<br>番組カバー
-          <!-- 実際のカバー画像URLが分かったら
-               <img src="..." alt="ラテンラジオ カバー画像" style="width:100%;height:100%;object-fit:cover;"> に差し替え可 -->
+          <img src="/assets/cover.svg" alt="ラテンラジオ カバー画像" />
+          <div class="placeholder">ラテンラジオ<br>番組カバー</div>
         </div>
         <div class="show-text">
           <div class="show-type">PODCAST</div>
